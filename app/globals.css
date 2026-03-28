@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-outfit);
+  
+  --color-primary: hsl(var(--primary));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-border: hsl(var(--border));
+  
+  --radius-lg: 0.5rem;
+  --radius-md: calc(0.5rem - 2px);
+  --radius-sm: calc(0.5rem - 4px);
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --primary: 358 80% 50%;
+    --border: 0 0% 89.8%;
+  }
+
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --primary: 358 80% 50%;
+    --border: 0 0% 14.9%;
+  }
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: var(--font-inter);
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-outfit);
+    font-weight: 800;
+  }
+  button:not(.no-capitalize),
+  .btn-primary,
+  a[href^="#"],
+  a[href^="mailto:"] {
+    text-transform: capitalize;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary text-white font-bold rounded-full transition-all hover:opacity-90;
+  }
+  
+  .glass {
+    background-color: rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .dark .glass {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  .premium-gradient {
+    background: linear-gradient(to bottom right, #E31B23, #991B1B);
+  }
+
+  .text-gradient {
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(to right, #E31B23, #F87171);
+  }
+}
+
+:root {
+  --font-inter: 'Inter', system-ui, sans-serif;
+  --font-outfit: 'Outfit', system-ui, sans-serif;
+}
