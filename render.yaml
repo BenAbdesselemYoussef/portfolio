@@ -1,0 +1,11 @@
+services:
+  - type: static
+    name: portfolio-youssef
+    env: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: out
+    # routing for SPAs if needed (though Next.js export handles most)
+    routes:
+      - type: rewrite
+        source: /index.html
+        destination: /
