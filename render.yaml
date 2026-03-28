@@ -1,6 +1,6 @@
 services:
   - type: static
-    name: portfolio-youssef
+    name: youssef-portfolio-2026
     env: static
     buildCommand: npm install && npm run build
     staticPublishPath: out
