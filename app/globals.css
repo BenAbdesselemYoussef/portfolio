@@ -3,12 +3,13 @@
 @theme {
   --font-sans: var(--font-inter);
   --font-heading: var(--font-outfit);
-  
+  --font-pixel: var(--font-pixel);
+
   --color-primary: hsl(var(--primary));
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
   --color-border: hsl(var(--border));
-  
+
   --radius-lg: 0.5rem;
   --radius-md: calc(0.5rem - 2px);
   --radius-sm: calc(0.5rem - 4px);
@@ -28,26 +29,71 @@
     --primary: 358 80% 50%;
     --border: 0 0% 14.9%;
   }
+
+  .gamified {
+    --font-inter: var(--font-pixel);
+    --font-outfit: var(--font-pixel);
+    --font-sans: var(--font-pixel);
+    --font-heading: var(--font-pixel);
+    --border: 0 0% 0%;
+    --primary: 346 100% 50%;
+    /* Neon Red */
+    cursor: url(https://cdn.cursors-4u.net/previews/league-of-legends-pointer-db2baa3d-32.webp), auto;
+  }
+
+  .dark.gamified {
+    --border: 0 0% 100%;
+    --background: 240 10% 4%;
+  }
 }
 
 @layer base {
   * {
     border-color: hsl(var(--border));
   }
+
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
-    font-family: var(--font-inter);
+    font-family: var(--font-sans);
+    line-height: 1.6;
   }
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-outfit);
+
+  .gamified body {
+    line-height: 2;
+    letter-spacing: -0.05em;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
     font-weight: 800;
   }
+
+  .gamified h1,
+  .gamified h2,
+  .gamified h3 {
+    text-transform: uppercase;
+    line-height: 1.4;
+    word-break: break-word;
+    hyphens: auto;
+    overflow-wrap: anywhere;
+  }
+
   button:not(.no-capitalize),
   .btn-primary,
   a[href^="#"],
   a[href^="mailto:"] {
     text-transform: capitalize;
+  }
+
+  .gamified button,
+  .gamified a {
+    text-transform: uppercase !important;
   }
 }
 
@@ -55,13 +101,29 @@
   .btn-primary {
     @apply bg-primary text-white font-bold rounded-full transition-all hover:opacity-90;
   }
-  
+
+  .gamified .btn-primary {
+    @apply rounded-none border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none;
+  }
+
+  .gamified .dark .btn-primary {
+    @apply border-white shadow-[4px_4px_0px_0px_rgba(255,255,255,1)];
+  }
+
   .glass {
     background-color: rgba(0, 0, 0, 0.05);
     backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
-  
+
+  .gamified .glass {
+    @apply border-4 border-black bg-white backdrop-filter-none;
+  }
+
+  .gamified .dark .glass {
+    @apply border-4 border-white bg-black;
+  }
+
   .dark .glass {
     background-color: rgba(255, 255, 255, 0.05);
   }
@@ -70,15 +132,42 @@
     background: linear-gradient(to bottom right, #E31B23, #991B1B);
   }
 
+  .gamified .premium-gradient {
+    background: #E31B23;
+  }
+
   .text-gradient {
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
     background-image: linear-gradient(to right, #E31B23, #F87171);
   }
+
+  .gamified .text-gradient {
+    background-clip: initial;
+    -webkit-background-clip: initial;
+    color: hsl(var(--primary));
+    background-image: none;
+  }
+
+  /* Scanline Effect */
+  .gamified::before {
+    content: " ";
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+    z-index: 9999;
+    background-size: 100% 4px, 3px 100%;
+    pointer-events: none;
+  }
 }
 
 :root {
   --font-inter: 'Inter', system-ui, sans-serif;
   --font-outfit: 'Outfit', system-ui, sans-serif;
+  --font-pixel: 'Press Start 2P', system-ui, sans-serif;
 }

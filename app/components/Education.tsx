@@ -2,10 +2,12 @@
 
 import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import { useTheme } from '../context/ThemeContext';
 import { education, certifications, languages } from '../data/resume';
 
 export default function Education() {
   const { language, t } = useLanguage();
+  const { isGamified } = useTheme();
 
   return (
     <section id="education" className="py-24 px-6 md:px-12 max-w-7xl mx-auto border-t border-border/50">
@@ -14,7 +16,7 @@ export default function Education() {
           <h2 className="text-3xl md:text-5xl font-heading font-extrabold tracking-tight">
             {t.education.title}
           </h2>
-          <div className="mt-4 w-20 h-1.5 bg-primary rounded-full" />
+          <div className={`mt-4 w-20 h-1.5 bg-primary ${isGamified ? 'rounded-none h-3' : 'rounded-full'}`} />
         </div>
 
         <div className="md:w-2/3 space-y-12">
@@ -24,7 +26,7 @@ export default function Education() {
                 <h3 className="text-xl md:text-2xl font-bold text-foreground">
                   {edu.school[language]}
                 </h3>
-                <span className="text-xs font-bold uppercase tracking-widest text-primary bg-primary/10 px-3 py-1 rounded-full whitespace-nowrap">
+                <span className={`text-[10px] md:text-xs font-bold uppercase tracking-widest text-primary bg-primary/10 px-3 py-1 ${isGamified ? 'rounded-none border-2 border-primary' : 'rounded-full'} whitespace-nowrap`}>
                   {edu.period}
                 </span>
               </div>
@@ -41,7 +43,7 @@ export default function Education() {
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {certifications.map((cert, index) => (
-                <div key={index} className="p-6 rounded-2xl bg-secondary/20 border border-border/40">
+                <div key={index} className={`p-6 ${isGamified ? 'rounded-none border-4 border-black dark:border-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)]' : 'rounded-2xl border-border/40'} bg-secondary/20 border`}>
                   <h4 className="font-bold text-foreground mb-2">{cert.name}</h4>
                   <p className="text-sm text-muted-foreground">
                     {cert.description[language]}
